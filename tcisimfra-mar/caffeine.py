@@ -17,14 +17,14 @@ import matplotlib.pyplot as plt
 from matplotlib.widgets import Slider, Button
 
 #%%constants
-ka=  0.033#0.033#abs constant min-1, central value from all the proposed values in article
-kel= np.log(2)/450 #elim constant min-1, same as above.
-Vd= 0.7*70 #distribution volume, same as above, L*Kg-1
-D= 120#dose, mg
+ka=  0.033 #0.033#abs constant min-1, central value from all the proposed values in article
+kel= np.log(2) / 450 #elim constant min-1, same as above.
+Vd= 0.7 * 70 #distribution volume, same as above, L*Kg-1
+D= 120 #dose, mg
 Vdepot= 0.2 #volume at depot site (L) (cup coffe 200mL)
 
-t_frame= 24*60 #15 hours in minutes
-t_span= np.arange(0,t_frame)
+t_frame= 24 * 60 #15 hours in minutes
+t_span= np.arange(0, t_frame)
 
 #to initialize curves
 Ap= np.zeros(t_frame)
@@ -32,13 +32,15 @@ Ag= np.zeros(t_frame)
 
 #%% plot me
 
-fig= plt.figure('Simulation caffeine absorption',
+fig = plt.figure('Simulation caffeine absorption',
                 figsize=(14,9))
 
+ax_plasma = fig.add_subplot(111)
 
-ax_plasma= fig.add_subplot(111)
 #ax_plasma.set_yscale('log')
+
 plt.subplots_adjust(bottom= 0.3)
+
 ax_plasma.set_title('Caffeine concentration (plasma) after 1, 2 and 3 oral 120mg intake')
 
 ax_plasma.set_xlabel('Time after the first cup (hours)')
@@ -47,20 +49,22 @@ ax_plasma.grid()
 ax_plasma.set_xlim([0,t_frame/60])
 ax_plasma.set_ylim([0,6])
 
-tick_ref= np.arange(0,t_frame+60,60)/60
+tick_ref = np.arange(0,t_frame+60,60) / 60
 ax_plasma.set_xticks(tick_ref )
+
 #ax_plasma.set_xticklabels([x+6 for x in range(len(tick_ref))])
 l1, = ax_plasma.plot([],[], c= 'C1', label= 'first cup')
 l2, = ax_plasma.plot([],[], c= 'C2', label= 'second cup')
 l3, = ax_plasma.plot([],[], c= 'C3', label= 'third cup')
 
 #create axes for sliders
-ax_ka= plt.axes([0.20,0.16, 0.4, 0.02])
-ax_kel= plt.axes([0.20,0.10, 0.4, 0.02])
-ax_vd= plt.axes([0.20,0.04, 0.4, 0.02])
-slide_ka= Slider(ax_ka, r'Absorption (K$_{a}$), min$^{-1}$', 0.015, 0.05, ka )
-slide_kel= Slider(ax_kel, r'Elimination (K$_{10}$), min$^{-1}$', kel*0.55, kel*1.45, kel)
-slide_vd= Slider(ax_vd, r'Vd mL Kg$^{-1}$', 0.55,0.85, Vd/70)
+ax_ka = plt.axes([0.20,0.16, 0.4, 0.02])
+ax_kel = plt.axes([0.20,0.10, 0.4, 0.02])
+ax_vd = plt.axes([0.20,0.04, 0.4, 0.02])
+
+slide_ka = Slider(ax_ka, r'Absorption (K$_{a}$), min$^{-1}$', 0.015, 0.05, ka )
+slide_kel = Slider(ax_kel, r'Elimination (K$_{10}$), min$^{-1}$', kel*0.55, kel*1.45, kel)
+slide_vd = Slider(ax_vd, r'Vd mL Kg$^{-1}$', 0.55,0.85, Vd/70)
 
 ax_plasma.legend()
 

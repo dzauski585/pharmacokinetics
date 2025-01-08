@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.integrate import odeint
-import leanbodymass as lbm
+import DanTCI.leanbodymass as lbm
 
 weight= 75 #kg
 height= 170 #cm
