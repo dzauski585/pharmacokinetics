@@ -3,7 +3,7 @@ import numpy as np
 from scipy.integrate import odeint
 import DanTCI.leanbodymass as lbm
 
-weight= 75 #kg
+weight= 75 #kgggg
 height= 170 #cm
 age= 85 #yr
 gender= 'f'
