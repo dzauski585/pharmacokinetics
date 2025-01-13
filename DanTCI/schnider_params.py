@@ -24,6 +24,6 @@ def schnider_params_calc(a,w,h,lbm):
     k13 = clearance_slow_periph / vd_central
     k31 = clearance_slow_periph / vd_slow_peripheral
     
-    schneider_params=(vd_central,vd_rapid_peripheral,vd_slow_peripheral,k10,k12,k21,k13,k31)
+    schneider_params = [vd_central,vd_rapid_peripheral,vd_slow_peripheral,k10,k12,k21,k13,k31]
     
     return schneider_params
