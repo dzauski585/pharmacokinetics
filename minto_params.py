@@ -26,19 +26,19 @@ keo= lambda age: 0.8781651900711107 -0.007038728622707376*age
 def minto_params_calc(g,a,w,h):
     lbm= lbm_calc(g,w,h)
     #See table 3 in article mentioned above
-    vd_central= 5.1 - 0.0201* (a-40) + 0.072*(lbm-55) #L
-    vd_rapid_peripheral= 9.82 - 0.0811* (a-40) + 0.108*(lbm-55) #L
-    vd_slow_peripheral= 5.42 #L
+    v1= 5.1 - 0.0201* (a-40) + 0.072*(lbm-55) #L  vd_central
+    v2 = 9.82 - 0.0811* (a-40) + 0.108*(lbm-55) #L vd_rapid_peripheral
+    v3 = 5.42 #L vd_slow_peripheral
     clearance_met= 2.6 - 0.0162*(a-40) + 0.0191*(lbm-55)
     clearance_rapid_periph= 2.05-0.0301*(a-40)
     clearance_slow_periph= 0.076-0.00113*(a-40) #all clearances L min-1
     
     #to make integration easier, I calculate elim constants
-    k10= clearance_met/vd_central
-    k12= clearance_rapid_periph/vd_central
-    k21= clearance_rapid_periph/vd_rapid_peripheral
-    k13= clearance_slow_periph/vd_central
-    k31= clearance_slow_periph/vd_slow_peripheral
+    k10= clearance_met/v1
+    k12= clearance_rapid_periph/v1
+    k21= clearance_rapid_periph/v2
+    k13= clearance_slow_periph/v1
+    k31= clearance_slow_periph/v3
     ke0= keo(a)
     model= 'Minto'
     drug_name= 'Remifentanil'
@@ -48,9 +48,9 @@ def minto_params_calc(g,a,w,h):
     params=[drug_name, 
             model,
             units, ec50,
-            vd_central,
-            vd_rapid_peripheral,
-            vd_slow_peripheral,
+            v1,
+            v2,
+            v3,
             k10,
             k12,k21,
             k13,k31,

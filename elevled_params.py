@@ -63,23 +63,23 @@ def eleveld_params_calc(g,a,w,h):
     
     f_opiates= lambda x: np.exp(x*a) #assume always opioids, otherwise 1
     
-    vd_central= t1* (f_central(w)/f_central(70))
-    vd_rapid_peripheral= t2* f_ageing(t10)* (w/70)
-    vd_slow_peripheral= t3*  ffm(g, a, w, h)/ffm('m',35,70,170)* f_opiates(t13)
+    v1 = t1* (f_central(w)/f_central(70)) #vd_central
+    v2 = t2* f_ageing(t10)* (w/70) #vd_rapid_peripheral
+    v3 = t3*  ffm(g, a, w, h)/ffm('m',35,70,170)* f_opiates(t13) #vd_slow_peripheral
     
     if g== 'm':
         theta= t4
     elif g== 'f':
         theta= t15
     cl= theta* ((w/70)**0.75) * quot_cl_mat* f_opiates(t11)
-    q2= t5*((vd_rapid_peripheral/25.5)**0.75)* (1+ t6* (1- f_q3_maturation))
-    q3= t6*((vd_slow_peripheral/273)**0.75)* quot_f_q3_mat 
+    q2= t5*((v2/25.5)**0.75)* (1+ t6* (1- f_q3_maturation))
+    q3= t6*((v3/273)**0.75)* quot_f_q3_mat 
     
-    k10= cl/vd_central
-    k12= q2/vd_central
-    k21= q2/vd_rapid_peripheral
-    k13= q3/vd_central
-    k31= q3/vd_slow_peripheral
+    k10= cl/v1
+    k12= q2/v1
+    k21= q2/v2
+    k13= q3/v1
+    k31= q3/v3
     
     Ce50= 3.08 * f_ageing(-0.00635)
     ke0= 0.146*(w/70)**(-0.25)
@@ -92,9 +92,9 @@ def eleveld_params_calc(g,a,w,h):
     params=[drug_name, 
             model,
             units, Ce50,
-            vd_central,
-            vd_rapid_peripheral,
-            vd_slow_peripheral,
+            v1,
+            v2,
+            v3,
             k10,
             k12,k21,
             k13,k31,
