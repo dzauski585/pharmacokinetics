@@ -28,11 +28,11 @@ def minto_params_calc(g, a, w, h):
     clearance_slow_periph = 0.076-0.00113 * (a - 40) #all clearances L min-1
     
     #to make integration easier, I calculate elim constants
-    k10 = clearance_met/v1
-    k12 = clearance_rapid_periph/v1
-    k21 = clearance_rapid_periph/v2
-    k13 = clearance_slow_periph/v1
-    k31 = clearance_slow_periph/v3
+    k10 = clearance_met / v1
+    k12 = clearance_rapid_periph / v1
+    k21 = clearance_rapid_periph / v2
+    k13 = clearance_slow_periph / v1
+    k31 = clearance_slow_periph / v3
     ke0 = keo(a)
     model = 'Minto'
     drug_name = 'Remifentanil'
