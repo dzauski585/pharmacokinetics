@@ -7,13 +7,13 @@ The Journal of the American Society of Anesthesiologists 88(5):p 1170-1182, May 
 
 https://www.researchgate.net/publication/232211950_The_Influence_of_Method_of_Administration_and_Covariates_on_the_Pharmacokinetics_of_Propofol_in_Adult_Volunteers
 '''
+import leanbodymass as LBM
 
-
-def schnider_params_calc(a,w,h,lbm):
+def schnider_params_calc(a, w, h):
     v1 = 4.27 #L 
     v2 = 18.9 - 0.391 * (a - 53) #L vd_rapid_peripheral
     v3 = 238 #L vd_slow_peripheral
-    clearance_met = 1.89 + ((w - 77) * 0.0456) + ((lbm - 59) * -0.0681) + ((h - 177) * 0.0264)
+    clearance_met = 1.89 + ((w - 77) * 0.0456) + ((LBM.lbm_calc - 59) * -0.0681) + ((h - 177) * 0.0264)
     clearance_rapid_periph = 1.29 - 0.024 * (a - 53)
     clearance_slow_periph = 0.836 #all clearances L min-1
     

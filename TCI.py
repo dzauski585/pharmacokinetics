@@ -11,10 +11,9 @@ gender = 'f'
 model = 'schneider'
 
 
-leanbm = lbm.lbm_calc(gender, weight, height)
 
 if model == 'schneider':
-    params = sp.schnider_params_calc(age, weight, height, leanbm)
+    params = sp.schnider_params_calc(age, weight, height)
 
 print(params)
 
