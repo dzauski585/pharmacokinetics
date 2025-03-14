@@ -6,7 +6,7 @@ https://pubmed.ncbi.nlm.nih.gov/1859758/
 def marsh_params():
     v1 = 0.228 #L/kg
     v2 = 0.463 # L/kg
-    v3 = 2893 # L/kg
+    v3 = 2.893 # L/kg
 
     k10 = 0.119 #min^-1 (k10 = K10 + K1e)
     k12 = 0.112 #min^-1
