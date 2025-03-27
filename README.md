@@ -1,16 +1,54 @@
-# Propofol PK/PD Simulation
+# Anesthetic PK/PD Simulation
 
-A Python-based pharmacokinetic/pharmacodynamic (PK/PD) simulation tool for modeling propofol concentrations and effects during anesthesia.
+A Python-based pharmacokinetic/pharmacodynamic (PK/PD) simulation tool for modeling propofol, remifentanil, and dexmetetomidine concentrations and their effects during anesthesia.
+
+## Pharacokinetics Review
+
+### PK Software
+
+There are commercially available target controlled infusion systems. They traditionally are for soley propofol or a combination of propofol and remifentantil. These ssytems are used in most countries with one notable exception, the United States. The models available for use are the Marsh and Schneider models for only propofol and the Minto model for a combination of propofol and remifentanil. The simulation software described in this readme will have addiitional medications and models available. 
+
+Depending on the model used there are different goal targets for the medication. The Marsh model uses plasma concentration while the others use effect site concentration. The Ce requires an additional model component; the effect site and therefore a keo value desciribn the movement of the drug to this compartment. Cp and Ce are both dependent on hemodynamic factors which are largely assumed to be normal for the purposes of simulation. It should also be noted that Ce is difficult to impossible to measure. It should also be noted that to allow for increases in Ce the Cp must be overshot to ensure that drug delivery continues into the fourth compartment. 
+
+### Three Compartment Model
+
+The classic model is made up of three compartments V1,2,3. V1 is the large central vascular compartment where are bolus and infusions start. V2 is the vessel rich areas like muscles, and V3 is the vessel poor areas such as fat. To model this effect a tri-exponential curve is uses to show the decline in Cp after bolus injection. The Cp at anytime may be derived from the following equation and graph: C(t) = Ae^-alphaT + Be^betaT + Ce^-gammaT. A, B, C represent phase coefficients which sum to the Cp after a bolus. Alpha, Beta, and Gamma are phase rate constants. e is the natural logarithm. T is time and C is concentration. 
+
+Images and graphs
+
+### Marsh Model vs Schneider Model
+
+The Marsh model was first and did not include elderly or obese patients in their cohort. The model was later updated with a larger keo value to increase accuracy. The schnider model incoporates lean body mass and age. The LBM formula used is the James formula. Unfortunatey the model allows for exponential increases in k10 with total body weight and it decreases with lbm. These are opposing actions so the companies using this model impose a lbm limit to utilize the maximum k10. Both models do not accuratlye represent the increase obesity epidemic around the world. 
+
+### Eleveld Model
+
+This model is meant to be a unified model that can accurately deliver propofol or remifentanil to a patient of any age or weight. This model is not in use by any commercial TCI pump but is in use in many research applications. It was born out of the open TCI initiative and uses data from many subjects. The model is far more complex. 
 
 ## Overview
 
-This software implements the Schneider model for propofol to simulate:
+This software implements the multiple models for anesthetic agents to simulate:
 - Plasma concentrations (Cp)
 - Effect site concentrations (Ce)
 - Bispectral Index (BIS) values
 - Wake-up times following different dosing regimens
 
 The simulation allows for customized patient demographics (weight, height, age, sex) and flexible dosing regimens including boluses and variable-rate infusions.
+
+### Models
+
+#### Propofol
+
+- Schneider
+- Marsh
+- Eleveld
+- Roberts (10-8-6)
+
+#### Remifentanil
+
+- Minto
+
+#### Dexmetetomdine
+
 
 ## Features
 
@@ -155,7 +193,7 @@ This simulation can be used for:
 
 - This is a simulation tool and should not be used as the sole basis for clinical decisions
 - The model is based on population averages and may not perfectly predict individual patient responses
-- Always consult with a qualified anesthesiologist for clinical applications
+- Always consult with a qualified anesthesiologist and/or certified registered nurse anesthetist for clinical applications
 
 ## License
 
