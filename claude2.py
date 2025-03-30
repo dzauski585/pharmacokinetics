@@ -231,6 +231,7 @@ def plot_results(t, infusion_rates, bolus_times, cp, ce, bis, wake_time=None):
                     fontsize=10)
     
     ax2.set_ylabel('Concentration\n(mcg/mL)')
+    ax2.set_ylim(0,8 )#ignores bolus Ce
     ax2.legend()
     ax2.grid(True)
     
@@ -260,7 +261,7 @@ def main():
         {'type': 'bolus', 'time': 0, 'dose': 2.0, 'duration': 0.1},  # mg/kg bolus at t=0
         {'type': 'infusion', 'time': 0.1, 'rate': 166.67, 'duration': 10},  # mcg/kg/min for 10 min
         {'type': 'infusion', 'time': 10.1, 'rate': 133.33, 'duration': 10},  # mcg/kg/min for 10 min
-        {'type': 'infusion', 'time': 20.1, 'rate': 100, 'duration': 99.9},  # mcg/kg/min until 120 min
+        {'type': 'infusion', 'time': 20.1, 'rate': 100, 'duration': 119.9},  # mcg/kg/min until 120 min
     ]
     
     # Simulation parameters
