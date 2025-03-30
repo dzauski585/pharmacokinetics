@@ -14,19 +14,23 @@ Depending on the model used there are different goal targets for the medication.
 
 The classic model is made up of three compartments V1,2,3. V1 is the large central vascular compartment where are bolus and infusions start. V2 is the vessel rich areas like muscles, and V3 is the vessel poor areas such as fat. To model this effect a tri-exponential curve is uses to show the decline in Cp after bolus injection. The Cp at anytime may be derived from the following equation and graph: C(t) = Ae^-alphaT + Be^betaT + Ce^-gammaT. A, B, C represent phase coefficients which sum to the Cp after a bolus. Alpha, Beta, and Gamma are phase rate constants. e is the natural logarithm. T is time and C is concentration. 
 
-Images and graphs
+![alt text](image-1.png)
+![alt text](image.png)
 
 ### Marsh Model vs Schneider Model
 
-The Marsh model was first and did not include elderly or obese patients in their cohort. The model was later updated with a larger keo value to increase accuracy. The schnider model incoporates lean body mass and age. The LBM formula used is the James formula. Unfortunatey the model allows for exponential increases in k10 with total body weight and it decreases with lbm. These are opposing actions so the companies using this model impose a lbm limit to utilize the maximum k10. Both models do not accuratlye represent the increase obesity epidemic around the world. 
+The Marsh model was first and did not include elderly or obese patients in their cohort. The model was later updated with a larger keo value to increase accuracy. The schnider model incoporates lean body mass and age. The LBM formula used is the James formula. Unfortunatey the model allows for exponential increases in k10 with total body weight and it decreases with lbm. These are opposing actions so the companies using this model impose a lbm limit to utilize the maximum k10. Both models do not accuratlye represent the increase obesity epidemic around the world.
+
+![alt text](image-2.png)
 
 ### Eleveld Model
 
-This model is meant to be a unified model that can accurately deliver propofol or remifentanil to a patient of any age or weight. This model is not in use by any commercial TCI pump but is in use in many research applications. It was born out of the open TCI initiative and uses data from many subjects. The model is far more complex. 
+This model is meant to be a unified model that can accurately deliver propofol or remifentanil to a patient of any age or weight. This model is not in use by any commercial TCI pump but is in use in many research applications. It was born out of the open TCI initiative and uses data from many subjects. The model is far more complex.
 
 ## Overview
 
 This software implements the multiple models for anesthetic agents to simulate:
+
 - Plasma concentrations (Cp)
 - Effect site concentrations (Ce)
 - Bispectral Index (BIS) values
@@ -115,12 +119,14 @@ time_step = 0.1   # minutes
 Calculates PK/PD parameters based on the Schneider model using patient demographics.
 
 **Parameters:**
+
 - `weight`: Patient weight in kg
 - `height`: Patient height in cm
 - `age`: Patient age in years
 - `sex`: Patient sex ('male' or 'female')
 
 **Returns:**
+
 - Dictionary containing all PK/PD parameters
 
 ### `run_simulation(model_params, weight, dosing_regimen, total_time, dt)`
@@ -128,6 +134,7 @@ Calculates PK/PD parameters based on the Schneider model using patient demograph
 Runs the PK/PD simulation using the provided parameters.
 
 **Parameters:**
+
 - `model_params`: Dictionary of PK/PD parameters from `get_schneider_parameters()`
 - `weight`: Patient weight in kg
 - `dosing_regimen`: List of dosing events (boluses and infusions)
@@ -135,6 +142,7 @@ Runs the PK/PD simulation using the provided parameters.
 - `dt`: Time step for simulation in minutes
 
 **Returns:**
+
 - Tuple containing: time points, infusion rates, bolus times, plasma concentrations, effect site concentrations, BIS values, and wake-up time
 
 ### `plot_results(t, infusion_rates, bolus_times, cp, ce, bis, wake_time)`
@@ -142,9 +150,11 @@ Runs the PK/PD simulation using the provided parameters.
 Creates a visualization of the simulation results.
 
 **Parameters:**
+
 - Results from `run_simulation()`
 
 **Returns:**
+
 - Matplotlib figure object
 
 ## Dosing Regimen Format
@@ -171,11 +181,13 @@ The dosing regimen is specified as a list of dictionaries:
 ## Example Output
 
 The simulation produces a three-panel plot showing:
+
 1. Infusion rates and bolus times
 2. Plasma and effect site concentrations
 3. BIS values over time
 
 A summary of key clinical metrics is also printed to the console:
+
 - Time to surgical anesthesia (BIS < 60)
 - Time to therapeutic concentration
 - Wake-up time prediction
@@ -184,6 +196,7 @@ A summary of key clinical metrics is also printed to the console:
 ## Clinical Applications
 
 This simulation can be used for:
+
 - Educational purposes in anesthesiology
 - Pre-procedure planning for complex cases
 - Research on optimizing propofol dosing regimens
@@ -199,10 +212,6 @@ This simulation can be used for:
 
 [Include license information here]
 
-## Citation
+## Citations
 
-If you use this software in your research, please cite:
-
-```
-[Citation information to be added]
-```
+Al-Rifai, Ziad & Mulvey, David. (2015). Principles of total intravenous anaesthesia: basic pharmacokinetics and model descriptions. BJA Education. 16. 10.1093/bjaceaccp/mkv021.
